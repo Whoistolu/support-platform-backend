@@ -3,9 +3,10 @@ class CreateTickets < ActiveRecord::Migration[8.0]
     create_table :tickets do |t|
       t.string :title
       t.text :description
-      t.integer :status
-      t.references :customer, null: false, foreign_key: true
-      t.references :assigned_agent, null: false, foreign_key: true
+      t.integer :status, default: 0
+
+      t.references :customer, null: false, foreign_key: { to_table: :users }
+      t.references :assigned_agent, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end
